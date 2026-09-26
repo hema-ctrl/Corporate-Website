@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vhir IT Solutions - Build, Analyze & Create Digital Products</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cyan: '#00a8e8',
+                            cyanHover: '#0090c8',
+                            blue: '#1b4965',
+                            navy: '#0f2b46',
+                            lightBg: '#f8fafc',
+                            lightSection: '#ffffff',
+                            gold: '#f5b813',
+                            goldHover: '#d99f0e',
+                            charcoal: '#334155',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+        }
+
+        .card-light-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+        }
+
+        .card-light-hover:hover {
+            box-shadow: 0 20px 30px -10px rgba(0, 168, 232, 0.15), 0 10px 15px -5px rgba(245, 184, 19, 0.1);
+            border-color: rgba(0, 168, 232, 0.3);
+        }
+
+        .gradient-footer {
+            background: linear-gradient(180deg, #0f2b46 0%, #081726 100%);
+        }
+
+        .hero-slide {
+            transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+        }
+
+        .hero-slide.hidden-slide {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.97);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide.active-slide {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
+            position: relative;
+        }
+
+        .glow-effect {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #00a8e8;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f5b813;
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-slate-50 text-slate-700 antialiased selection:bg-brand-cyan selection:text-white">
+
+    <header
+        class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#home" class="flex items-center space-x-3 group">
+                    <div class="w-12 h-12 flex items-center justify-center group-hover:scale-105 transition-transform">
+                        <svg viewBox="0 0 200 170" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Top Left Square Node -->
+                            <rect x="8" y="5" width="40" height="40" rx="12" fill="#00a8e8" />
+                            <path d="M 8,25 Q 28,25 28,45 L 8,45 Z" fill="#1b4965" />
+
+                            <!-- Top Right Square Node -->
+                            <rect x="152" y="5" width="40" height="40" rx="12" fill="#1b4965" />
+                            <path d="M 172,5 Q 172,25 192,25 L 192,5 Z" fill="#00a8e8" />
+
+                            <!-- Central Ribbon Curve Left -->
+                            <path d="M 5,55 Q 35,55 55,95 Q 85,150 115,155 Q 75,155 35,115 Q 5,75 5,55 Z"
+                                fill="#1b4965" />
+                            <path d="M 5,55 Q 50,55 85,115 Q 100,140 115,155 Q 80,135 50,85 Q 20,55 5,55 Z"
+                                fill="#00a8e8" />
+
+                            <!-- Central Ribbon Curve Right -->
+                            <path d="M 195,55 Q 165,55 145,95 Q 115,150 85,155 Q 125,155 165,115 Q 195,75 195,55 Z"
+                                fill="#00a8e8" />
+                            <path d="M 195,55 Q 150,55 115,115 Q 100,140 85,155 Q 120,135 150,85 Q 180,55 195,55 Z"
+                                fill="#1b4965" />
+
+                            <!-- Gold Wings Left & Right -->
+                            <path d="M 5,100 Q 25,95 45,115 Q 25,125 5,125 Z" fill="#f5b813" />
+                            <path d="M 195,100 Q 175,95 155,115 Q 175,125 195,125 Z" fill="#f5b813" />
+
+                            <!-- Base Accent Left & Right -->
+                            <path d="M 5,122 Q 25,122 40,145 Q 20,155 5,155 Z" fill="#475569" />
+                            <path d="M 195,122 Q 175,122 160,145 Q 180,155 195,155 Z" fill="#475569" />
+                        </svg>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-extrabold tracking-tight text-brand-navy leading-none">Vhir IT</span>
+                        <span
+                            class="text-[10px] font-bold text-brand-gold uppercase tracking-widest mt-0.5">Solutions</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav id="desktop-nav" class="hidden md:flex space-x-8">
+                    <a href="#home"
+                        class="nav-link text-sm font-semibold text-brand-cyan border-b-2 border-brand-cyan pb-1 transition-all">Home</a>
+                    <a href="#services"
+                        class="nav-link text-sm font-medium text-slate-600 hover:text-brand-cyan border-b-2 border-transparent pb-1 transition-all">Services</a>
+                    <a href="#works"
+                        class="nav-link text-sm font-medium text-slate-600 hover:text-brand-cyan border-b-2 border-transparent pb-1 transition-all">Our
+                        Works</a>
+                    <a href="#tech"
+                        class="nav-link text-sm font-medium text-slate-600 hover:text-brand-cyan border-b-2 border-transparent pb-1 transition-all">Technology</a>
+                    <a href="#testimonials"
+                        class="nav-link text-sm font-medium text-slate-600 hover:text-brand-cyan border-b-2 border-transparent pb-1 transition-all">Testimonials</a>
+                    <a href="#contact"
+                        class="nav-link text-sm font-medium text-slate-600 hover:text-brand-cyan border-b-2 border-transparent pb-1 transition-all">Contact
+                        Us</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden md:flex items-center">
+                    <a href="#contact"
+                        class="bg-brand-cyan hover:bg-brand-cyanHover text-white font-semibold text-sm px-6 py-2.5 rounded-full shadow-md shadow-brand-cyan/20 hover:shadow-brand-cyan/30 transition-all duration-200 border-b-2 border-brand-gold">
+                        Get In Touch
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" type="button"
+                        class="text-slate-700 hover:text-brand-cyan p-2 rounded-lg focus:outline-none"
+                        aria-label="Toggle Navigation">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3 shadow-xl">
+            <a href="#home"
+                class="mobile-nav-link block px-3 py-2 rounded-md text-base font-semibold text-brand-cyan bg-slate-50">Home</a>
+            <a href="#services"
+                class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50">Services</a>
+            <a href="#works"
+                class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50">Our
+                Works</a>
+            <a href="#tech"
+                class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50">Technology</a>
+            <a href="#testimonials"
+                class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50">Testimonials</a>
+            <a href="#contact"
+                class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50">Contact
+                Us</a>
+            <div class="pt-2">
+                <a href="#contact"
+                    class="w-full text-center block bg-brand-cyan hover:bg-brand-cyanHover text-white font-semibold text-sm px-6 py-3 rounded-full shadow">
+                    Get In Touch
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section id="home"
+        class="relative pt-12 pb-16 lg:pt-20 lg:pb-28 bg-gradient-to-b from-slate-50 to-slate-100/60 overflow-hidden min-h-[620px] flex items-center">
+        <!-- Background Glowing Accent Bubbles -->
+        <div class="glow-effect w-96 h-96 bg-brand-cyan/10 top-10 -left-20"></div>
+        <div class="glow-effect w-96 h-96 bg-brand-gold/10 bottom-10 -right-20"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+            <div class="relative min-h-[460px]">
+
+                <!-- SLIDE 1: BUILD AND DEPLOY -->
+                <div class="hero-slide active-slide" id="hero-slide-0">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+                            <span
+                                class="inline-block px-3.5 py-1 rounded-full text-xs font-bold bg-white text-brand-cyan uppercase tracking-widest border border-slate-200 shadow-sm">
+                                <i class="fa-solid fa-square text-brand-gold mr-1.5 text-[10px]"></i> Engineering
+                                Excellence
+                            </span>
+                            <h1
+                                class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-navy tracking-tight leading-tight">
+                                Build And <span class="text-brand-cyan">Deploy</span>
+                            </h1>
+                            <p class="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+                                At Vhir IT Solutions, we engineer scalable cloud apps and robust software architectures
+                                tailored to accelerate your commercial deployment with speed and reliability.
+                            </p>
+                            <div class="pt-2 flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                                <a href="#services"
+                                    class="inline-flex items-center justify-center bg-brand-cyan hover:bg-brand-cyanHover text-white font-semibold px-8 py-3.5 rounded-full shadow-lg shadow-brand-cyan/20 transition-all duration-200 border-b-2 border-brand-gold">
+                                    Explore Solutions
+                                    <i class="fa-solid fa-arrow-right ml-2 text-xs text-brand-gold"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-6 relative flex justify-center">
+                            <div class="relative w-full max-w-lg lg:max-w-none">
+                                <div
+                                    class="relative mx-auto bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-2xl overflow-hidden">
+                                    <div
+                                        class="bg-slate-50/90 rounded-2xl p-6 shadow-inner border border-slate-200 space-y-4">
+                                        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                                            <div class="flex space-x-2">
+                                                <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                                                <div class="w-3 h-3 rounded-full bg-brand-gold"></div>
+                                                <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
+                                            </div>
+                                            <span
+                                                class="text-xs font-mono text-slate-400">https://vhiritsolutions.com</span>
+                                        </div>
+                                        <div class="grid grid-cols-3 gap-3">
+                                            <div
+                                                class="bg-white p-4 rounded-xl flex flex-col items-center text-center space-y-2 border border-slate-200 shadow-sm">
+                                                <i class="fa-solid fa-cloud-arrow-up text-brand-cyan text-3xl"></i>
+                                                <span class="text-xs font-bold text-slate-700">Cloud Host</span>
+                                            </div>
+                                            <div
+                                                class="bg-white p-4 rounded-xl flex flex-col items-center text-center space-y-2 border border-slate-200 shadow-sm">
+                                                <i class="fa-solid fa-code text-brand-gold text-3xl"></i>
+                                                <span class="text-xs font-bold text-slate-700">API Core</span>
+                                            </div>
+                                            <div
+                                                class="bg-white p-4 rounded-xl flex flex-col items-center text-center space-y-2 border border-slate-200 shadow-sm">
+                                                <i class="fa-solid fa-shield-halved text-brand-cyan text-3xl"></i>
+                                                <span class="text-xs font-bold text-slate-700">Protected</span>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="p-3 bg-white rounded-xl flex items-center justify-between border border-slate-200 shadow-sm">
+                                            <div class="flex items-center space-x-3">
+                                                <div
+                                                    class="w-8 h-8 rounded-lg bg-brand-cyan text-white flex items-center justify-center font-bold text-xs">
+                                                    Vhir</div>
+                                                <div>
+                                                    <div class="h-2.5 w-28 bg-slate-200 rounded"></div>
+                                                    <div class="h-2 w-16 bg-slate-100 rounded mt-1.5"></div>
+                                                </div>
+                                            </div>
+                                            <span
+                                                class="text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200"><i
+                                                    class="fa-solid fa-check mr-1"></i> Live</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 2: IN-DEPTH ANALYSIS -->
+                <div class="hero-slide hidden-slide" id="hero-slide-1">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+                            <span
+                                class="inline-block px-3.5 py-1 rounded-full text-xs font-bold bg-white text-brand-gold uppercase tracking-widest border border-slate-200 shadow-sm">
+                                <i class="fa-solid fa-chart-pie mr-1"></i> Data Driven Insights
+                            </span>
+                            <h1
+                                class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-navy tracking-tight leading-tight">
+                                In-Depth <span class="text-brand-gold">Analysis</span>
+                            </h1>
+                            <p class="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+                                We utilize intelligent data analytics and business telemetry to inspect every
+                                touchpoint, ensuring optimal performance, security, and high ROI for your web
+                                applications.
+                            </p>
+                            <div class="pt-2 flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                                <a href="#services"
+                                    class="inline-flex items-center justify-center bg-brand-gold hover:bg-brand-goldHover text-slate-900 font-bold px-8 py-3.5 rounded-full shadow-lg shadow-brand-gold/20 transition-all duration-200">
+                                    Analyze Performance
+                                    <i class="fa-solid fa-chart-line ml-2 text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-6 relative flex justify-center">
+                            <div class="relative w-full max-w-lg lg:max-w-none">
+                                <div
+                                    class="relative mx-auto bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-2xl overflow-hidden">
+                                    <div
+                                        class="bg-slate-50/90 rounded-2xl p-6 shadow-inner border border-slate-200 space-y-4">
+                                        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                                            <span class="text-xs font-bold text-slate-700"><i
+                                                    class="fa-solid fa-chart-pie text-brand-gold mr-2"></i>Analytics
+                                                Dashboard</span>
+                                            <span class="text-xs text-slate-400 font-mono">Realtime Stream</span>
+                                        </div>
+                                        <div class="space-y-3">
+                                            <div>
+                                                <div
+                                                    class="flex justify-between text-xs font-semibold text-slate-600 mb-1">
+                                                    <span>System Performance</span>
+                                                    <span class="text-brand-cyan">99.8%</span>
+                                                </div>
+                                                <div class="w-full bg-slate-200 rounded-full h-2.5">
+                                                    <div class="bg-brand-cyan h-2.5 rounded-full" style="width: 98%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div
+                                                    class="flex justify-between text-xs font-semibold text-slate-600 mb-1">
+                                                    <span>User Retention Rate</span>
+                                                    <span class="text-brand-gold">88.4%</span>
+                                                </div>
+                                                <div class="w-full bg-slate-200 rounded-full h-2.5">
+                                                    <div class="bg-brand-gold h-2.5 rounded-full" style="width: 88%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div
+                                                    class="flex justify-between text-xs font-semibold text-slate-600 mb-1">
+                                                    <span>Response Latency</span>
+                                                    <span class="text-brand-blue">12ms</span>
+                                                </div>
+                                                <div class="w-full bg-slate-200 rounded-full h-2.5">
+                                                    <div class="bg-brand-blue h-2.5 rounded-full" style="width: 95%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="p-3 bg-amber-50 rounded-xl flex items-center justify-between text-xs text-amber-800 font-semibold border border-amber-200">
+                                            <span><i
+                                                    class="fa-solid fa-magnifying-glass-chart mr-2 text-brand-gold"></i>Audit
+                                                Completed</span>
+                                            <span
+                                                class="bg-brand-gold text-slate-900 font-bold px-2.5 py-0.5 rounded-full text-[10px]">Optimal</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 3: UNMATCHED CREATIVITY -->
+                <div class="hero-slide hidden-slide" id="hero-slide-2">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+                            <span
+                                class="inline-block px-3.5 py-1 rounded-full text-xs font-bold bg-white text-brand-cyan uppercase tracking-widest border border-slate-200 shadow-sm">
+                                <i class="fa-solid fa-wand-magic-sparkles mr-1 text-brand-cyan"></i> Modern UI &
+                                Experience
+                            </span>
+                            <h1
+                                class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-navy tracking-tight leading-tight">
+                                Unmatched <span class="text-brand-cyan">Creativity</span>
+                            </h1>
+                            <p class="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+                                Transform client interaction with pixel-perfect design systems, engaging user
+                                interfaces, and bespoke branding engineered by Vhir IT Solutions.
+                            </p>
+                            <div class="pt-2 flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                                <a href="#works"
+                                    class="inline-flex items-center justify-center bg-brand-cyan hover:bg-brand-cyanHover text-white font-semibold px-8 py-3.5 rounded-full shadow-lg shadow-brand-cyan/20 transition-all duration-200 border-b-2 border-brand-gold">
+                                    View Design Portfolio
+                                    <i class="fa-solid fa-palette ml-2 text-xs text-brand-gold"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-6 relative flex justify-center">
+                            <div class="relative w-full max-w-lg lg:max-w-none">
+                                <div
+                                    class="relative mx-auto bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-2xl overflow-hidden">
+                                    <div
+                                        class="bg-slate-50/90 rounded-2xl p-6 shadow-inner border border-slate-200 space-y-4">
+                                        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                                            <span class="text-xs font-bold text-slate-700"><i
+                                                    class="fa-solid fa-compass-drafting text-brand-cyan mr-2"></i>Design
+                                                System Matrix</span>
+                                            <span
+                                                class="text-xs text-brand-cyan font-semibold bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200">Figma
+                                                Ready</span>
+                                        </div>
+                                        <div class="grid grid-cols-2 gap-3">
+                                            <div
+                                                class="p-3 bg-gradient-to-r from-sky-50 to-white rounded-xl text-slate-800 border border-sky-100 shadow-sm">
+                                                <i class="fa-solid fa-swatchbook text-xl mb-1 text-brand-gold"></i>
+                                                <div class="text-xs font-bold">Design Tokens</div>
+                                                <div class="text-[10px] text-slate-500">Harmonized Palette</div>
+                                            </div>
+                                            <div
+                                                class="p-3 bg-gradient-to-r from-blue-50 to-white rounded-xl text-slate-800 border border-blue-100 shadow-sm">
+                                                <i class="fa-solid fa-bezier-curve text-xl mb-1 text-brand-cyan"></i>
+                                                <div class="text-xs font-bold">Vector UI</div>
+                                                <div class="text-[10px] text-slate-500">Smooth Motion</div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="p-3 bg-white rounded-xl flex items-center justify-between text-xs text-slate-700 border border-slate-200 shadow-sm">
+                                            <span><i class="fa-solid fa-mobile-screen text-brand-cyan mr-2"></i>Adaptive
+                                                Viewports</span>
+                                            <span class="font-bold text-brand-cyan">100% Responsive</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Slide Indicator Dots -->
+            <div class="flex justify-center items-center space-x-2 mt-8">
+                <button class="hero-dot w-3 h-3 rounded-full bg-brand-cyan transition-all" data-slide="0"
+                    aria-label="Slide 1"></button>
+                <button class="hero-dot w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-400 transition-all"
+                    data-slide="1" aria-label="Slide 2"></button>
+                <button class="hero-dot w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-400 transition-all"
+                    data-slide="2" aria-label="Slide 3"></button>
+            </div>
+
+            <!-- Tech Stack Icon Badges Row -->
+            <div class="mt-14 pt-8 border-t border-slate-200/80 text-center">
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-6">Trusted Technologies &
+                    Frameworks</p>
+                <div class="flex flex-wrap justify-center items-center gap-6 md:gap-12">
+                    <div class="flex items-center space-x-2 text-slate-500 hover:text-brand-cyan transition-colors">
+                        <i class="fa-brands fa-wordpress text-2xl text-slate-600"></i>
+                        <span class="font-semibold text-sm">WordPress</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-slate-500 hover:text-brand-cyan transition-colors">
+                        <i class="fa-brands fa-php text-2xl text-indigo-600"></i>
+                        <span class="font-semibold text-sm">PHP</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-slate-500 hover:text-brand-cyan transition-colors">
+                        <i class="fa-solid fa-database text-xl text-brand-gold"></i>
+                        <span class="font-semibold text-sm">MySQL</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-slate-500 hover:text-brand-cyan transition-colors">
+                        <i class="fa-brands fa-android text-2xl text-emerald-600"></i>
+                        <span class="font-semibold text-sm">Android</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-slate-500 hover:text-brand-cyan transition-colors">
+                        <i class="fa-brands fa-apple text-2xl text-slate-800"></i>
+                        <span class="font-semibold text-sm">iOS Apple</span>
+                    </div>
+                    <div class="flex items-center space-x-2 text-slate-500 hover:text-brand-cyan transition-colors">
+                        <i class="fa-brands fa-windows text-2xl text-brand-cyan"></i>
+                        <span class="font-semibold text-sm">Windows</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-extrabold text-brand-navy tracking-tight">Our Services</h2>
+                <div class="w-16 h-1 bg-brand-gold mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div
+                    class="bg-white rounded-2xl p-8 card-light-shadow card-light-hover transition-all duration-300 flex flex-col items-center text-center group border border-slate-100">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-sky-50 text-brand-cyan border border-sky-100 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-cyan group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-navy mb-3">Web Development</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                        Custom responsive websites and enterprise web applications built with clean architecture and
+                        lightning speed.
+                    </p>
+                    <a href="#contact"
+                        class="mt-auto inline-flex items-center text-xs font-bold text-white bg-brand-cyan hover:bg-brand-cyanHover px-5 py-2.5 rounded-full transition-colors border-b-2 border-brand-gold">
+                        Read More
+                    </a>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div
+                    class="bg-white rounded-2xl p-8 card-light-shadow card-light-hover transition-all duration-300 flex flex-col items-center text-center group border border-slate-100">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-amber-50 text-brand-gold border border-amber-100 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-gold group-hover:text-slate-900 transition-all duration-300">
+                        <i class="fa-solid fa-palette"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-navy mb-3">UI/UX & Branding</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                        Human-centered prototyping, Figma design systems, and sleek branding layouts tailored to modern
+                        software.
+                    </p>
+                    <a href="#contact"
+                        class="mt-auto inline-flex items-center text-xs font-bold text-white bg-brand-cyan hover:bg-brand-cyanHover px-5 py-2.5 rounded-full transition-colors border-b-2 border-brand-gold">
+                        Read More
+                    </a>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div
+                    class="bg-white rounded-2xl p-8 card-light-shadow card-light-hover transition-all duration-300 flex flex-col items-center text-center group border border-slate-100">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-indigo-50 text-indigo-600 border border-indigo-100 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-navy mb-3">Mobile App Dev</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                        Cross-platform iOS and Android mobile application development with real-time sync and smooth
+                        performance.
+                    </p>
+                    <a href="#contact"
+                        class="mt-auto inline-flex items-center text-xs font-bold text-white bg-brand-cyan hover:bg-brand-cyanHover px-5 py-2.5 rounded-full transition-colors border-b-2 border-brand-gold">
+                        Read More
+                    </a>
+                </div>
+
+                <!-- Service Card 4 -->
+                <div
+                    class="bg-white rounded-2xl p-8 card-light-shadow card-light-hover transition-all duration-300 flex flex-col items-center text-center group border border-slate-100">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-navy mb-3">E-Commerce Solutions</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                        Scalable online stores with secure checkout gateway integrations, product inventory, and
+                        customer portals.
+                    </p>
+                    <a href="#contact"
+                        class="mt-auto inline-flex items-center text-xs font-bold text-white bg-brand-cyan hover:bg-brand-cyanHover px-5 py-2.5 rounded-full transition-colors border-b-2 border-brand-gold">
+                        Read More
+                    </a>
+                </div>
+
+                <!-- Service Card 5 -->
+                <div
+                    class="bg-white rounded-2xl p-8 card-light-shadow card-light-hover transition-all duration-300 flex flex-col items-center text-center group border border-slate-100">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-sky-50 text-brand-cyan border border-sky-100 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-cyan group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-navy mb-3">Cloud & Hosting</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                        High-availability server infrastructure, seamless cloud migration, security auditing, and
+                        continuous deployment.
+                    </p>
+                    <a href="#contact"
+                        class="mt-auto inline-flex items-center text-xs font-bold text-white bg-brand-cyan hover:bg-brand-cyanHover px-5 py-2.5 rounded-full transition-colors border-b-2 border-brand-gold">
+                        Read More
+                    </a>
+                </div>
+
+                <!-- Service Card 6 -->
+                <div
+                    class="bg-white rounded-2xl p-8 card-light-shadow card-light-hover transition-all duration-300 flex flex-col items-center text-center group border border-slate-100">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-amber-50 text-brand-gold border border-amber-100 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-gold group-hover:text-slate-900 transition-all duration-300">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-navy mb-3">Digital Analytics & SEO</h3>
+                    <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                        In-depth traffic analysis, organic search optimization, and performance tracking to grow online
+                        reach.
+                    </p>
+                    <a href="#contact"
+                        class="mt-auto inline-flex items-center text-xs font-bold text-white bg-brand-cyan hover:bg-brand-cyanHover px-5 py-2.5 rounded-full transition-colors border-b-2 border-brand-gold">
+                        Read More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="works" class="py-20 bg-slate-50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-3xl font-extrabold text-brand-navy tracking-tight">Our Works</h2>
+                <div class="w-16 h-1 bg-brand-gold mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <!-- Tab Filters -->
+            <div class="flex flex-wrap justify-center items-center gap-2 mb-12">
+                <button data-filter="all"
+                    class="portfolio-btn bg-brand-cyan text-white border-b-2 border-brand-gold px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all shadow-sm">ALL</button>
+                <button data-filter="css"
+                    class="portfolio-btn bg-white hover:bg-slate-100 text-slate-600 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all border border-slate-200">CSS</button>
+                <button data-filter="html"
+                    class="portfolio-btn bg-white hover:bg-slate-100 text-slate-600 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all border border-slate-200">HTML</button>
+                <button data-filter="core"
+                    class="portfolio-btn bg-white hover:bg-slate-100 text-slate-600 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all border border-slate-200">CORE</button>
+                <button data-filter="swift"
+                    class="portfolio-btn bg-white hover:bg-slate-100 text-slate-600 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all border border-slate-200">SWIFT</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div id="portfolio-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Item 1 -->
+                <div
+                    class="portfolio-item css group relative overflow-hidden rounded-2xl shadow-md bg-white border border-slate-200">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80"
+                        alt="Hardware Project"
+                        class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end text-white">
+                        <span class="text-xs font-bold text-brand-gold uppercase tracking-wider">CSS Styling</span>
+                        <h4 class="text-lg font-bold">Smart Industrial Portal</h4>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div
+                    class="portfolio-item html group relative overflow-hidden rounded-2xl shadow-md bg-white border border-slate-200">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80"
+                        alt="Tech Architecture"
+                        class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end text-white">
+                        <span class="text-xs font-bold text-brand-cyan uppercase tracking-wider">HTML Framework</span>
+                        <h4 class="text-lg font-bold">Enterprise Cyber Suite</h4>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div
+                    class="portfolio-item core group relative overflow-hidden rounded-2xl shadow-md bg-white border border-slate-200">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80"
+                        alt="Microchip Tech"
+                        class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end text-white">
+                        <span class="text-xs font-bold text-brand-gold uppercase tracking-wider">CORE Systems</span>
+                        <h4 class="text-lg font-bold">Embedded Micro-Controller</h4>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div
+                    class="portfolio-item swift group relative overflow-hidden rounded-2xl shadow-md bg-white border border-slate-200">
+                    <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=600&q=80"
+                        alt="Mobile Tech"
+                        class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end text-white">
+                        <span class="text-xs font-bold text-brand-cyan uppercase tracking-wider">SWIFT iOS App</span>
+                        <h4 class="text-lg font-bold">Financial Mobile Dashboard</h4>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div
+                    class="portfolio-item css group relative overflow-hidden rounded-2xl shadow-md bg-white border border-slate-200">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80"
+                        alt="Robotics"
+                        class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end text-white">
+                        <span class="text-xs font-bold text-brand-gold uppercase tracking-wider">CSS Project</span>
+                        <h4 class="text-lg font-bold">Automated Control Console</h4>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div
+                    class="portfolio-item core group relative overflow-hidden rounded-2xl shadow-md bg-white border border-slate-200">
+                    <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&q=80"
+                        alt="Software UX"
+                        class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end text-white">
+                        <span class="text-xs font-bold text-brand-cyan uppercase tracking-wider">CORE System</span>
+                        <h4 class="text-lg font-bold">Cloud Infrastructure Hub</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tech" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-extrabold text-brand-navy tracking-tight">Web & Mobile Tech Stack</h2>
+                <div class="w-16 h-1 bg-brand-gold mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- HTML5 -->
+                <div
+                    class="bg-white p-6 rounded-2xl border border-slate-200 card-light-shadow flex items-center space-x-4 hover:-translate-y-1 hover:border-brand-gold transition-all">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-amber-50 text-brand-gold flex items-center justify-center text-2xl shrink-0">
+                        <i class="fa-brands fa-html5"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-800">HTML5</h4>
+                        <span class="text-xs text-slate-500">Markup</span>
+                    </div>
+                </div>
+
+                <!-- CSS3 -->
+                <div
+                    class="bg-white p-6 rounded-2xl border border-slate-200 card-light-shadow flex items-center space-x-4 hover:-translate-y-1 hover:border-brand-cyan transition-all">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-sky-50 text-brand-cyan flex items-center justify-center text-2xl shrink-0">
+                        <i class="fa-brands fa-css3-alt"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-800">CSS3</h4>
+                        <span class="text-xs text-slate-500">Styling</span>
+                    </div>
+                </div>
+
+                <!-- JavaScript -->
+                <div
+                    class="bg-white p-6 rounded-2xl border border-slate-200 card-light-shadow flex items-center space-x-4 hover:-translate-y-1 hover:border-brand-gold transition-all">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-amber-50 text-brand-gold flex items-center justify-center text-2xl shrink-0">
+                        <i class="fa-brands fa-js"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-800">JavaScript</h4>
+                        <span class="text-xs text-slate-500">Logic</span>
+                    </div>
+                </div>
+
+                <!-- Oracle -->
+                <div
+                    class="bg-white p-6 rounded-2xl border border-slate-200 card-light-shadow flex items-center space-x-4 hover:-translate-y-1 hover:border-brand-blue transition-all">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-slate-100 text-brand-blue flex items-center justify-center text-2xl shrink-0">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-800">Oracle</h4>
+                        <span class="text-xs text-slate-500">Database</span>
+                    </div>
+                </div>
+
+                <!-- MongoDB -->
+                <div
+                    class="bg-white p-6 rounded-2xl border border-slate-200 card-light-shadow flex items-center space-x-4 hover:-translate-y-1 hover:border-emerald-500 transition-all">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl shrink-0">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-800">MongoDB</h4>
+                        <span class="text-xs text-slate-500">NoSQL</span>
+                    </div>
+                </div>
+
+                <!-- React JS -->
+                <div
+                    class="bg-white p-6 rounded-2xl border border-slate-200 card-light-shadow flex items-center space-x-4 hover:-translate-y-1 hover:border-brand-cyan transition-all">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-sky-50 text-brand-cyan flex items-center justify-center text-2xl shrink-0">
+                        <i class="fa-brands fa-react"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-800">React JS</h4>
+                        <span class="text-xs text-slate-500">Frontend</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-20 bg-slate-50 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pointer-events-none flex items-center justify-center">
+            <svg class="w-full h-full max-w-6xl text-brand-blue" fill="currentColor" viewBox="0 0 1000 500"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M150,120 Q180,90 220,110 T300,100 T380,140 T320,220 T220,250 T160,190 Z M450,150 Q520,110 580,140 T650,210 T580,290 T480,260 T420,200 Z M720,160 Q800,130 880,170 T920,260 T820,320 T740,260 Z M250,300 Q300,320 320,380 T280,440 T220,410 T210,340 Z" />
+                <circle cx="210" cy="180" r="5" class="animate-ping fill-brand-cyan" />
+                <circle cx="530" cy="190" r="5" class="animate-ping fill-brand-gold" />
+                <circle cx="790" cy="220" r="5" class="animate-ping fill-brand-cyan" />
+                <circle cx="280" cy="370" r="5" class="animate-ping fill-brand-gold" />
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl font-extrabold text-brand-navy tracking-tight">What People Say After Using Our
+                    Services</h2>
+                <div class="w-16 h-1 bg-brand-gold mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <!-- Testimonial Card Slider -->
+            <div
+                class="max-w-3xl mx-auto bg-white/95 backdrop-blur-md p-8 sm:p-12 rounded-3xl border border-slate-200/80 shadow-xl text-center relative">
+                <i class="fa-solid fa-quote-left text-4xl text-brand-gold absolute top-6 left-6 opacity-40"></i>
+
+                <!-- Arrow Navigation Left -->
+                <button id="prev-testimonial"
+                    class="absolute left-3 sm:-left-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white shadow-lg border border-slate-200 text-slate-700 hover:bg-brand-cyan hover:text-white transition-all flex items-center justify-center z-20 focus:outline-none">
+                    <i class="fa-solid fa-chevron-left text-sm"></i>
+                </button>
+
+                <!-- Arrow Navigation Right -->
+                <button id="next-testimonial"
+                    class="absolute right-3 sm:-right-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white shadow-lg border border-slate-200 text-slate-700 hover:bg-brand-cyan hover:text-white transition-all flex items-center justify-center z-20 focus:outline-none">
+                    <i class="fa-solid fa-chevron-right text-sm"></i>
+                </button>
+
+                <p id="testimonial-quote"
+                    class="text-slate-600 text-base sm:text-lg leading-relaxed italic mb-8 relative z-10 min-h-[90px] flex items-center justify-center">
+                    "Vhir IT Solutions transformed our enterprise setup with remarkable execution. Their engineering
+                    speed, analysis accuracy, and sleek design standards exceeded our targets!"
+                </p>
+
+                <div class="flex flex-col items-center">
+                    <img id="testimonial-avatar"
+                        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
+                        alt="Client Avatar"
+                        class="w-16 h-16 rounded-full object-cover border-2 border-brand-cyan mb-3 shadow">
+                    <h4 id="testimonial-name" class="text-base font-bold text-brand-navy">Sarah Jenkins</h4>
+                    <span id="testimonial-role" class="text-xs font-semibold text-brand-cyan mb-2">CTO, Nexa Cloud
+                        Systems</span>
+
+                    <div class="flex space-x-1 text-brand-gold text-xs">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+
+                <!-- Dots -->
+                <div class="flex justify-center space-x-2 mt-8">
+                    <button class="testimonial-dot w-3 h-3 rounded-full bg-brand-cyan" data-index="0"></button>
+                    <button class="testimonial-dot w-2.5 h-2.5 rounded-full bg-slate-300" data-index="1"></button>
+                    <button class="testimonial-dot w-2.5 h-2.5 rounded-full bg-slate-300" data-index="2"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-3xl font-extrabold text-brand-navy tracking-tight">Have Questions? Contact Us</h2>
+                <p class="text-slate-500 text-sm mt-2">Get in touch with the Vhir IT Solutions team for project
+                    inquiries or technical support.</p>
+                <div class="w-16 h-1 bg-brand-gold mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 card-light-shadow">
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-xs font-semibold text-slate-600 mb-1">Your
+                                    Name</label>
+                                <input type="text" id="name" required placeholder="Enter Name"
+                                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 text-slate-800 rounded-xl focus:bg-white focus:border-brand-cyan focus:outline-none text-sm transition-all placeholder:text-slate-400">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-xs font-semibold text-slate-600 mb-1">Email
+                                    Address</label>
+                                <input type="email" id="email" required placeholder="vhiritsolutions@gmail.com"
+                                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 text-slate-800 rounded-xl focus:bg-white focus:border-brand-cyan focus:outline-none text-sm transition-all placeholder:text-slate-400">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-xs font-semibold text-slate-600 mb-1">Phone
+                                    Number</label>
+                                <input type="tel" id="phone" placeholder="+91 9877665544"
+                                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 text-slate-800 rounded-xl focus:bg-white focus:border-brand-cyan focus:outline-none text-sm transition-all placeholder:text-slate-400">
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col">
+                            <label for="message" class="block text-xs font-semibold text-slate-600 mb-1">Message</label>
+                            <textarea id="message" rows="6" required placeholder="Write your project requirements..."
+                                class="w-full h-full px-4 py-3 bg-slate-50 border border-slate-200 text-slate-800 rounded-xl focus:bg-white focus:border-brand-cyan focus:outline-none text-sm transition-all resize-none placeholder:text-slate-400"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="text-center pt-4">
+                        <button type="submit"
+                            class="bg-brand-cyan hover:bg-brand-cyanHover text-white font-bold text-sm px-10 py-3.5 rounded-full shadow-md shadow-brand-cyan/20 transition-all hover:scale-105 active:scale-95 border-b-2 border-brand-gold">
+                            Submit Inquiry
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="gradient-footer text-slate-300 pt-16 pb-8 rounded-t-[2.5rem] shadow-2xl mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+
+                <!-- Column 1: Business Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 flex items-center justify-center">
+                            <svg viewBox="0 0 200 170" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="8" y="5" width="40" height="40" rx="12" fill="#00a8e8" />
+                                <path d="M 8,25 Q 28,25 28,45 L 8,45 Z" fill="#ffffff" />
+                                <rect x="152" y="5" width="40" height="40" rx="12" fill="#ffffff" />
+                                <path d="M 172,5 Q 172,25 192,25 L 192,5 Z" fill="#00a8e8" />
+                                <path d="M 5,55 Q 35,55 55,95 Q 85,150 115,155 Q 75,155 35,115 Q 5,75 5,55 Z"
+                                    fill="#ffffff" />
+                                <path d="M 5,55 Q 50,55 85,115 Q 100,140 115,155 Q 80,135 50,85 Q 20,55 5,55 Z"
+                                    fill="#00a8e8" />
+                                <path d="M 195,55 Q 165,55 145,95 Q 115,150 85,155 Q 125,155 165,115 Q 195,75 195,55 Z"
+                                    fill="#00a8e8" />
+                                <path d="M 195,55 Q 150,55 115,115 Q 100,140 85,155 Q 120,135 150,85 Q 180,55 195,55 Z"
+                                    fill="#ffffff" />
+                                <path d="M 5,100 Q 25,95 45,115 Q 25,125 5,125 Z" fill="#f5b813" />
+                                <path d="M 195,100 Q 175,95 155,115 Q 175,125 195,125 Z" fill="#f5b813" />
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold text-white tracking-tight">Vhir IT Solutions</span>
+                    </div>
+                    <p class="text-xs leading-relaxed text-slate-400">
+                        Pioneering enterprise web applications, mobile apps, and robust cloud platforms to drive
+                        commercial expansion.
+                    </p>
+                    <div class="pt-2 text-xs space-y-2 text-slate-300">
+                        <p class="flex items-start"><i
+                                class="fa-solid fa-location-dot text-brand-gold mr-2.5 mt-0.5"></i> Narayanapuram,
+                            Chennai, Tamil Nadu, India</p>
+                        <p class="flex items-center"><i class="fa-solid fa-envelope text-brand-cyan mr-2.5"></i>
+                            vhiritsolutions@gmail.com</p>
+                        <p class="flex items-center"><i class="fa-solid fa-phone text-brand-cyan mr-2.5"></i> +91
+                            9877665544</p>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div>
+                    <h4
+                        class="text-white text-sm font-bold uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
+                        Quick Links</h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#home" class="hover:text-brand-cyan transition-colors">Home</a></li>
+                        <li><a href="#services" class="hover:text-brand-cyan transition-colors">Services</a></li>
+                        <li><a href="#works" class="hover:text-brand-cyan transition-colors">Our Portfolio</a></li>
+                        <li><a href="#tech" class="hover:text-brand-cyan transition-colors">Technology Stack</a></li>
+                        <li><a href="#testimonials" class="hover:text-brand-cyan transition-colors">Testimonials</a>
+                        </li>
+                        <li><a href="#contact" class="hover:text-brand-cyan transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Services -->
+                <div>
+                    <h4
+                        class="text-white text-sm font-bold uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
+                        Services</h4>
+                    <ul class="space-y-2.5 text-xs">
+                        <li><a href="#services" class="hover:text-brand-cyan transition-colors">Web Development</a></li>
+                        <li><a href="#services" class="hover:text-brand-cyan transition-colors">UI/UX & Branding</a>
+                        </li>
+                        <li><a href="#services" class="hover:text-brand-cyan transition-colors">Mobile App Dev</a></li>
+                        <li><a href="#services" class="hover:text-brand-cyan transition-colors">E-Commerce Platforms</a>
+                        </li>
+                        <li><a href="#services" class="hover:text-brand-cyan transition-colors">Cloud & Security</a>
+                        </li>
+                        <li><a href="#services" class="hover:text-brand-cyan transition-colors">SEO & Analytics</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Location Map -->
+                <div>
+                    <h4
+                        class="text-white text-sm font-bold uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">
+                        Location Map</h4>
+                    <div
+                        class="rounded-xl overflow-hidden border border-slate-800 shadow-md h-36 relative bg-slate-900">
+                        <iframe title="Vhir IT Solutions Location Map"
+                            src="https://maps.google.com/maps?q=Narayanapuram%2C%20Chennai%2C%20Tamil%20Nadu&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                            class="w-full h-full border-0 opacity-90 hover:opacity-100 transition-all duration-300"
+                            loading="lazy" allowfullscreen>
+                        </iframe>
+                    </div>
+                    <span class="text-[10px] text-slate-400 mt-2 block"><i
+                            class="fa-solid fa-map-pin text-brand-gold mr-1"></i> Narayanapuram, Chennai, TN</span>
+                </div>
+
+            </div>
+
+            <!-- Copyright & Social Links -->
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400">
+                <p>&copy; 2026 Vhir IT Solutions. All Rights Reserved.</p>
+                <div class="flex space-x-4 mt-4 sm:mt-0">
+                    <a href="#"
+                        class="w-8 h-8 rounded-full bg-slate-800 hover:bg-brand-cyan hover:text-white flex items-center justify-center transition-colors"><i
+                            class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"
+                        class="w-8 h-8 rounded-full bg-slate-800 hover:bg-brand-cyan hover:text-white flex items-center justify-center transition-colors"><i
+                            class="fa-brands fa-twitter"></i></a>
+                    <a href="#"
+                        class="w-8 h-8 rounded-full bg-slate-800 hover:bg-brand-cyan hover:text-white flex items-center justify-center transition-colors"><i
+                            class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"
+                        class="w-8 h-8 rounded-full bg-slate-800 hover:bg-brand-cyan hover:text-white flex items-center justify-center transition-colors"><i
+                            class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Navigation ScrollSpy
+            const sections = document.querySelectorAll('section[id]');
+            const desktopNavLinks = document.querySelectorAll('#desktop-nav .nav-link');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            function setActiveLink(id) {
+                desktopNavLinks.forEach(link => {
+                    const href = link.getAttribute('href').substring(1);
+                    if (href === id) {
+                        link.classList.remove('text-slate-600', 'border-transparent');
+                        link.classList.add('text-brand-cyan', 'font-semibold', 'border-brand-cyan');
+                    } else {
+                        link.classList.remove('text-brand-cyan', 'font-semibold', 'border-brand-cyan');
+                        link.classList.add('text-slate-600', 'border-transparent');
+                    }
+                });
+
+                mobileNavLinks.forEach(link => {
+                    const href = link.getAttribute('href').substring(1);
+                    if (href === id) {
+                        link.classList.remove('text-slate-700', 'hover:bg-slate-50');
+                        link.classList.add('text-brand-cyan', 'font-semibold', 'bg-slate-50');
+                    } else {
+                        link.classList.remove('text-brand-cyan', 'font-semibold', 'bg-slate-50');
+                        link.classList.add('text-slate-700', 'hover:bg-slate-50');
+                    }
+                });
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setActiveLink(entry.target.id);
+                    }
+                });
+            }, { rootMargin: '-20% 0px -60% 0px' });
+
+            sections.forEach(sec => observer.observe(sec));
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function () {
+                    const targetId = this.getAttribute('href').substring(1);
+                    if (targetId) setActiveLink(targetId);
+                });
+            });
+
+            // Mobile Drawer Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Hero Slider Rotation
+            const heroSlides = document.querySelectorAll('.hero-slide');
+            const heroDots = document.querySelectorAll('.hero-dot');
+            let currentHeroIndex = 0;
+            let heroTimer;
+
+            function showHeroSlide(index) {
+                currentHeroIndex = index;
+                heroSlides.forEach((slide, idx) => {
+                    if (idx === index) {
+                        slide.classList.remove('hidden-slide');
+                        slide.classList.add('active-slide');
+                    } else {
+                        slide.classList.remove('active-slide');
+                        slide.classList.add('hidden-slide');
+                    }
+                });
+
+                heroDots.forEach((dot, idx) => {
+                    if (idx === index) {
+                        dot.classList.remove('bg-slate-300', 'w-2.5', 'h-2.5');
+                        dot.classList.add('bg-brand-cyan', 'w-3', 'h-3');
+                    } else {
+                        dot.classList.remove('bg-brand-cyan', 'w-3', 'h-3');
+                        dot.classList.add('bg-slate-300', 'w-2.5', 'h-2.5');
+                    }
+                });
+            }
+
+            function startHeroTimer() {
+                heroTimer = setInterval(() => {
+                    let next = (currentHeroIndex + 1) % heroSlides.length;
+                    showHeroSlide(next);
+                }, 4000);
+            }
+
+            heroDots.forEach((dot, idx) => {
+                dot.addEventListener('click', () => {
+                    clearInterval(heroTimer);
+                    showHeroSlide(idx);
+                    startHeroTimer();
+                });
+            });
+
+            startHeroTimer();
+
+            // Portfolio Filtering
+            const filterBtns = document.querySelectorAll('.portfolio-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-brand-cyan', 'text-white', 'border-b-2', 'border-brand-gold', 'shadow-sm');
+                        b.classList.add('bg-white', 'text-slate-600');
+                    });
+                    btn.classList.remove('bg-white', 'text-slate-600');
+                    btn.classList.add('bg-brand-cyan', 'text-white', 'border-b-2', 'border-brand-gold', 'shadow-sm');
+
+                    const filter = btn.getAttribute('data-filter');
+
+                    portfolioItems.forEach(item => {
+                        if (filter === 'all' || item.classList.contains(filter)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Testimonial Slider Controls
+            const testimonials = [
+                {
+                    quote: `"Vhir IT Solutions transformed our enterprise setup with remarkable execution. Their engineering speed, analysis accuracy, and sleek design standards exceeded our targets!"`,
+                    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80",
+                    name: "Sarah Jenkins",
+                    role: "CTO, Nexa Cloud Systems"
+                },
+                {
+                    quote: `"The team at Vhir IT Solutions engineered our e-commerce platform with real-time inventory and zero downtime. Sales expanded by over 45% post launch."`,
+                    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
+                    name: "David Miller",
+                    role: "Product Lead, Apex Commerce"
+                },
+                {
+                    quote: `"Intuitive design, swift mobile performance, and responsive technical support. Vhir IT Solutions is our go-to partner for modern software development."`,
+                    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80",
+                    name: "Elena Rostova",
+                    role: "Founder, Quantum Tech"
+                }
+            ];
+
+            let currentTestimonial = 0;
+            const quoteEl = document.getElementById('testimonial-quote');
+            const avatarEl = document.getElementById('testimonial-avatar');
+            const nameEl = document.getElementById('testimonial-name');
+            const roleEl = document.getElementById('testimonial-role');
+            const dots = document.querySelectorAll('.testimonial-dot');
+            const prevBtn = document.getElementById('prev-testimonial');
+            const nextBtn = document.getElementById('next-testimonial');
+
+            function updateTestimonial(index) {
+                currentTestimonial = index;
+                const data = testimonials[index];
+
+                quoteEl.textContent = data.quote;
+                avatarEl.src = data.avatar;
+                nameEl.textContent = data.name;
+                roleEl.textContent = data.role;
+
+                dots.forEach((dot, idx) => {
+                    if (idx === index) {
+                        dot.classList.remove('bg-slate-300', 'w-2.5', 'h-2.5');
+                        dot.classList.add('bg-brand-cyan', 'w-3', 'h-3');
+                    } else {
+                        dot.classList.remove('bg-brand-cyan', 'w-3', 'h-3');
+                        dot.classList.add('bg-slate-300', 'w-2.5', 'h-2.5');
+                    }
+                });
+            }
+
+            prevBtn.addEventListener('click', () => {
+                let prev = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+                updateTestimonial(prev);
+            });
+
+            nextBtn.addEventListener('click', () => {
+                let next = (currentTestimonial + 1) % testimonials.length;
+                updateTestimonial(next);
+            });
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', (e) => {
+                    const index = parseInt(e.target.getAttribute('data-index'));
+                    updateTestimonial(index);
+                });
+            });
+
+            // Contact Form Feedback
+            const contactForm = document.getElementById('contact-form');
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-6 right-6 z-50 bg-white text-slate-800 px-6 py-4 rounded-2xl shadow-2xl border border-brand-cyan flex items-center space-x-3 transition-all transform translate-y-full opacity-0';
+                toast.innerHTML = `
+                    <i class="fa-solid fa-circle-check text-brand-cyan text-xl"></i>
+                    <div>
+                        <h5 class="font-bold text-sm text-brand-navy">Message Received!</h5>
+                        <p class="text-xs text-slate-500">Vhir IT Solutions team will contact you shortly.</p>
+                    </div>
+                `;
+                document.body.appendChild(toast);
+
+                setTimeout(() => toast.classList.remove('translate-y-full', 'opacity-0'), 100);
+                setTimeout(() => {
+                    toast.classList.add('translate-y-full', 'opacity-0');
+                    setTimeout(() => toast.remove(), 300);
+                }, 4000);
+
+                contactForm.reset();
+            });
+        });
+    </script>
+</body>
+
+</html>
